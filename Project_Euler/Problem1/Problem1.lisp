@@ -8,3 +8,7 @@
            (zerop (mod i 5)))
           (setf result (+ result i))))
     result))
+
+
+;;; CL-USER 228 > (sum-of-multiple-3-5 1000)
+;;; 233168
