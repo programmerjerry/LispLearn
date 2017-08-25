@@ -61,12 +61,12 @@
 
 (defun 10001st-prime (n)
   (let ((j 3) (i 2))
-    (loop while (< i n)
+    (loop while (<= i n) ;需要算上第n个质数
           do (if (is-primer j)
                  (setf i (1+ i)))
           (setf j (+ j 2)))
-    j))
+    (- j 2))) ; 循环里面多加了2，需要减掉
 
 
-;;; CL-USER 44 > (10001st-prime 10001)
-;;; 104731
+;;; CL-USER 47 > (10001st-prime 10001)
+;;; 104743
