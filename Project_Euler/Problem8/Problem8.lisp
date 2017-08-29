@@ -1,19 +1,8 @@
 ;;;; Problem 8 Largest product in a series
-;;;; 题目要求：在1000个数字中找到5个数字，这5个数字是连续的并且乘积是最大的
-;;; 注意: 123、323都是连续的数字
+;;;; 题目要求：在1000个数字中找到5个连续的数字并且乘积是最大的
+;;; 注意: 是找挨着的5个数字，而不是要求5个数字内部是连续的（例如：123、323）
+;;; 例如:开始的5个数字73167 就是连续的5个数字
 
-
-;;; 测试是否是连续的数字(123、323都是连续的数字)
-;;; 相邻2个数字的差的绝对值是1表示就是连续的数字
-(defun is-consecutive-digits (str)
-  (dotimes (i (1- (length str)))
-    (unless (= 1
-               (abs
-                (-
-                 (parse-integer (subseq str i (1+ i)))
-                 (parse-integer (subseq str (1+ i) (+ i 2))))))
-      (return-from is-consecutive-digits nil)))
-  t)
 
 ;;; 计算字符串中的一系列数字的乘积
 (defun get-product-from-string (str)
@@ -51,12 +40,11 @@
     (let ((max-product 0))
       (dotimes (i (- (length s) 5))
         (let ((new-str (subseq s i (+ i 5)))) ; 每次取5位
-          (if (is-consecutive-digits new-str) ; 判断是否是连续的数字
               (let ((new-product (get-product-from-string new-str))); 计算乘积
                 (if (> new-product max-product)
-                    (setf max-product new-product)))))) ; 每次将最大的乘积保存
+                    (setf max-product new-product))))) ; 每次将最大的乘积保存
       max-product)))
 
-;;; CL-USER 68 > (largest-product-in-a-series)
-;;; 28224
-     
+
+;;; CL-USER 156 > (largest-product-in-a-series)
+;;; 40824
