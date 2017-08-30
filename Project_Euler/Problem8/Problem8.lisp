@@ -1,6 +1,6 @@
 ;;;; Problem 8 Largest product in a series
-;;;; 题目要求：在1000个数字中找到5个连续的数字并且乘积是最大的
-;;; 注意: 是找挨着的5个数字，而不是要求5个数字内部是连续的（例如：123、323）
+;;;; 题目要求：在1000个数字中找到n个连续的数字并且乘积是最大的
+;;; 注意: 是找挨着的n个数字，而不是要求n个数字内部是连续的（例如：123、323）
 ;;; 例如:开始的5个数字73167 就是连续的5个数字
 
 
@@ -12,7 +12,7 @@
     result))
 
   
-(defun largest-product-in-a-series ()
+(defun largest-product-in-a-series (n)
   (let ((s "73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
@@ -38,13 +38,13 @@
     (setf s (remove #\newline s)) ; 去掉回车换行符
   ;  (print s)
     (let ((max-product 0))
-      (dotimes (i (- (length s) 5))
-        (let ((new-str (subseq s i (+ i 5)))) ; 每次取5位
+      (dotimes (i (- (length s) n))
+        (let ((new-str (subseq s i (+ i n)))) ; 每次取5位
               (let ((new-product (get-product-from-string new-str))); 计算乘积
                 (if (> new-product max-product)
                     (setf max-product new-product))))) ; 每次将最大的乘积保存
       max-product)))
 
 
-;;; CL-USER 156 > (largest-product-in-a-series)
-;;; 40824
+;;; CL-USER 280 > (largest-product-in-a-series 13)
+;;; 23514624000
